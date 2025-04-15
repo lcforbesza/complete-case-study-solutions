@@ -1,0 +1,8 @@
+services:
+  backstage-demo:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./workspace:/app/workspace

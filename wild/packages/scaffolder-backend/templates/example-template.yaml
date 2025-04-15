@@ -1,0 +1,43 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: example-template
+  title: Example Template with Custom Action
+  description: An example template that only uses our custom action
+spec:
+  owner: guest
+  type: service
+
+  # Parameters that will be prompted to the user
+  parameters:
+    - title: Basic Information
+      required:
+        - fileName
+        - fileContents
+      properties:
+        fileName:
+          title: File Name
+          type: string
+          description: Name of the file to create
+          default: hello-world.txt
+        fileContents:
+          title: File Contents
+          type: string
+          description: Contents of the file
+          default: "Hello, Backstage custom action!"
+          ui:widget: textarea
+
+  # Steps to execute
+  steps:
+    - id: create-file
+      name: Create File
+      action: my:custom:action
+      input:
+        path: ${{ parameters.fileName }}
+        contents: ${{ parameters.fileContents }}
+
+  # Output of the template
+  output:
+    links:
+      - title: Open Repository
+        url: '.'

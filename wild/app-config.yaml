@@ -1,0 +1,47 @@
+app:
+  title: Backstage App
+  baseUrl: http://localhost:3000
+
+organization:
+  name: My Organization
+
+backend:
+  baseUrl: http://localhost:7007
+  listen:
+    port: 7007
+  database:
+    client: better-sqlite3
+    connection: ':memory:'
+  cors:
+    origin: http://localhost:3000
+    methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
+    credentials: true
+
+scaffolder:
+  # Add your template location
+  templateLocations:
+    - type: file
+      target: ./packages/scaffolder-backend/templates/
+
+catalog:
+  import:
+    entityFilename: catalog-info.yaml
+  rules:
+    - allow: [Component, System, API, Resource, Location]
+  locations:
+    - type: file
+      target: ../../examples/entities.yaml
+
+auth:
+  providers:
+    guest: {}
+
+techdocs:
+  builder: 'local'
+  generator:
+    runIn: 'docker'
+  publisher:
+    type: 'local'
+
+permission:
+  enabled: true
