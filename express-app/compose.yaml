@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  backstage:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+      - "7007:7007"
+    volumes:
+      - ./:/app
+      - node_modules:/app/node_modules
+    environment:
+      NODE_ENV: development
+
+volumes:
+  node_modules:
