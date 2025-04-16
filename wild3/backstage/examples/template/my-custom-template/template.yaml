@@ -1,0 +1,31 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: my-custom-template
+  title: My Custom Template
+  description: A template that uses my custom action to create a file
+spec:
+  owner: guests
+  type: website
+  parameters:
+    - title: Enter the filename
+      properties:
+        filename:
+          title: Filename
+          type: string
+          description: Name of the file to create
+          default: my-custom-file.txt
+    - title: Enter the content
+      properties:
+        content:
+          title: Content
+          type: string
+          description: Content to write to the file
+          default: Hello from my custom action!
+  steps:
+    - id: create-file
+      name: Create File
+      action: my:custom:action
+      input:
+        filename: ${{ parameters.filename }}
+        content: ${{ parameters.content }}

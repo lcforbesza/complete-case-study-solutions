@@ -1,0 +1,13 @@
+services:
+  backstage:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4567:7007"
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
